@@ -1,0 +1,10 @@
+const navbar=document.querySelector('.navbar'),navMenu=document.querySelector('#navMenu'),hamburger=document.querySelector('#hamburger');
+hamburger.addEventListener('click',()=>{const open=navMenu.classList.toggle('open');hamburger.classList.toggle('open',open);hamburger.setAttribute('aria-expanded',String(open))});
+document.querySelectorAll('.nav-menu a').forEach(link=>link.addEventListener('click',()=>{navMenu.classList.remove('open');hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false')}));
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>30),{passive:true});
+const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(item=>revealObserver.observe(item));
+const navLinks=[...document.querySelectorAll('.nav-menu a')];
+const sectionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)navLinks.forEach(link=>link.classList.toggle('active',link.getAttribute('href')===`#${entry.target.id}`))}),{rootMargin:'-40% 0px -50% 0px'});
+document.querySelectorAll('main section[id]').forEach(section=>sectionObserver.observe(section));
+document.querySelector('#year').textContent=new Date().getFullYear();
