@@ -33,24 +33,36 @@ window.matchMedia('(min-width: 681px)').addEventListener('change', event => {
   if (event.matches) closeMenu();
 });
 
-if ('IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(link => {
-          const active = link.hash === `#${entry.target.id}`;
-          link.classList.toggle('active', active);
-          if (active) link.setAttribute('aria-current', 'location');
-          else link.removeAttribute('aria-current');
-        });
-      }
-    });
-  }, { rootMargin: '-15% 0px -65% 0px', threshold: 0 });
+const sections = navLinks.map(link => document.querySelector(link.hash)).filter(Boolean);
+
+function updateActiveSection() {
+  const offset = document.querySelector('.navbar').getBoundingClientRect().height + 32;
+  let current = sections[0];
+  sections.forEach(section => {
+    if (section.getBoundingClientRect().top <= offset) current = section;
+  });
+  if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+    current = sections[sections.length - 1];
+  }
   navLinks.forEach(link => {
-    const section = document.querySelector(link.hash);
-    if (section) observer.observe(section);
+    const active = link.hash === `#${current.id}`;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
   });
 }
+
+let scrollUpdatePending = false;
+window.addEventListener('scroll', () => {
+  if (scrollUpdatePending) return;
+  scrollUpdatePending = true;
+  window.requestAnimationFrame(() => {
+    updateActiveSection();
+    scrollUpdatePending = false;
+  });
+}, { passive: true });
+window.addEventListener('resize', updateActiveSection);
+updateActiveSection();
 
 const filters = [...document.querySelectorAll('.filter-button')];
 const projects = [...document.querySelectorAll('[data-categories]')];
@@ -59,6 +71,7 @@ document.querySelector('.project-filters').hidden = false;
 
 filters.forEach(button => button.addEventListener('click', () => {
   const filter = button.dataset.filter;
+  document.querySelector('.featured-grid').classList.toggle('is-filtered', filter !== 'all');
   filters.forEach(item => {
     const active = item === button;
     item.classList.toggle('active', active);
@@ -74,6 +87,7 @@ filters.forEach(button => button.addEventListener('click', () => {
     project.classList.contains('mini-project') && !project.hidden
   );
   projectStatus.textContent = `${count} projects shown. ${button.textContent} selected.`;
+  updateActiveSection();
 }));
 
 document.querySelector('#year').textContent = new Date().getFullYear();

@@ -1,6 +1,6 @@
 # Portfolio — Trịnh Dương Hoan
 
-Static, responsive AI Engineer and Data Scientist portfolio with no build step. Designed for direct deployment to GitHub Pages, with a light interface and accessible project filters.
+Static, responsive AI Engineer and Data Scientist portfolio with no build step. A profile sidebar sits beside experience, projects, and research on desktop; the layout becomes a single column on smaller screens. Uses a light neutral palette with slate blue accents and accessible project filters. Deploys directly to GitHub Pages.
 
 ## Run locally
 
