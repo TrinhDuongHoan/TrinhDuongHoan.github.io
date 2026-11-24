@@ -33,4 +33,4 @@ The site will be available at `https://trinhduonghoan.github.io`.
 - Project descriptions: public GitHub repositories and their READMEs, reviewed on November 24, 2026.
 - Featured projects: Fraud Detection, Learning Intelligence MLOps, IUH Admission Agentic RAG, VietDocAI, and Hospital Readmission MLOps.
 
-Project content is included in HTML so it remains available without JavaScript or a live GitHub API request. When adding projects, set `data-categories` to one or more of `ml`, `mlops`, `genai`, or `vision` to include them in the filters. The artwork in the featured cards is decorative, not a chart of measured results.
+Project content is included in HTML so it remains available without JavaScript or a live GitHub API request. When adding projects, set `data-categories` to one or more of `ml`, `mlops`, `genai`, or `vision` to include them in the filters.
