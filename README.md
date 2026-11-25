@@ -1,6 +1,8 @@
 # Portfolio — Trịnh Dương Hoan
 
-Static, responsive AI Engineer and Data Scientist portfolio with no build step. A profile sidebar sits beside experience, projects, and research on desktop; the layout becomes a single column on smaller screens. Uses a light neutral palette with slate blue accents and accessible project filters. Deploys directly to GitHub Pages.
+Static, responsive AI Engineer and Data Scientist portfolio with no build step. Uses a centered introduction, serif typography, and separate sections for education, experience, publications, projects, awards, skills, and contact. Project cards use two columns on desktop and one on mobile. The palette is light gray and white, with charcoal text and gray buttons. Deploys directly to GitHub Pages.
+
+Layout reference: [Alan Duong’s portfolio](https://alantrungduong.github.io/).
 
 ## Run locally
 
